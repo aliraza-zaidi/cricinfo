@@ -1,0 +1,43 @@
+#################### DATABASE SCHEMA ####################
+
+Database Name: cricinfo.db
+
+Tables and Fields:
+--------------------------------------------------------
+1. PlayerInfo
+   - player_id: INTEGER, PRIMARY KEY
+   - name: TEXT, NOT NULL
+   - country: TEXT, NOT NULL
+   - age: INTEGER, NOT NULL
+   - role: TEXT, NOT NULL
+
+--------------------------------------------------------
+2. BattingStats
+   - player_id: INTEGER, FOREIGN KEY REFERENCES PlayerInfo(player_id)
+   - innings: INTEGER, NOT NULL
+   - runs: INTEGER, NOT NULL
+   - average: REAL, NOT NULL
+   - strike_rate: REAL, NOT NULL
+   - highest_score: INTEGER, NOT NULL
+
+--------------------------------------------------------
+3. BowlingStats
+   - player_id: INTEGER, FOREIGN KEY REFERENCES PlayerInfo(player_id)
+   - innings: INTEGER, NOT NULL
+   - wickets: INTEGER, NOT NULL
+   - best_figures: TEXT, NOT NULL
+   - average: REAL, NOT NULL
+   - economy: REAL, NOT NULL
+
+Relationships:
+--------------------------------------------------------
+- `player_id` in BattingStats and BowlingStats is a FOREIGN KEY linked to `player_id` in PlayerInfo.
+
+Constraints:
+--------------------------------------------------------
+- All fields marked as NOT NULL must have valid data.
+- `player_id` in PlayerInfo is the unique identifier for players.
+- Stats tables (BattingStats and BowlingStats) depend on existing records in PlayerInfo.
+
+########################################################
+
